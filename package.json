@@ -1,0 +1,20 @@
+{
+  "name": "mecab-gyp",
+  "version": "1.0.0",
+  "description": "[NODEJS] Mecab native binding",
+  "main": "index.js",
+  "author": "hiroaki.kubota@mail.crumb.jp",
+  "license": "MIT",
+  "scripts": {
+    "build": "./node_modules/node-gyp/bin/node-gyp.js configure && ./node_modules/node-gyp/bin/node-gyp.js build"
+  },
+  "dependencies": {
+    "node-gyp": "^3.8.0",
+    "nan": "^2.12.1"
+  },
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/crumbjp/mecab_gyp.git"
+  }
+}
