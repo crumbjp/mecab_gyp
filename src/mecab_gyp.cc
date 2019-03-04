@@ -27,7 +27,7 @@ class MecabGyp : public Nan::ObjectWrap {
     if(this->tagger) {
       return this->tagger;
     }
-    this->tagger = tagger = MeCab::createTagger(this->options.c_str());
+    this->tagger = MeCab::createTagger(this->options.c_str());
     return this->tagger;
   }
 
