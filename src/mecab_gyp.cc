@@ -21,7 +21,10 @@ class MecabGyp : public Nan::ObjectWrap {
   explicit MecabGyp(const char *value) : tagger(0) {
     this->options = value;
   }
-  ~MecabGyp() {}
+  ~MecabGyp() {
+    delete this->tagger;
+    this->tagger = 0;
+  }
 
   MeCab::Tagger* getTagger() {
     if(this->tagger) {
@@ -33,7 +36,7 @@ class MecabGyp : public Nan::ObjectWrap {
 
   static NAN_METHOD(New) {
     if (info.IsConstructCall()) {
-      v8::String::Utf8Value options(info[0]);
+      Nan::Utf8String options(info[0]->ToString());
       MecabGyp *obj = new MecabGyp(*options);
       obj->Wrap(info.This());
       info.GetReturnValue().Set(info.This());
@@ -47,7 +50,7 @@ class MecabGyp : public Nan::ObjectWrap {
 
   static NAN_METHOD(ParseAsNode) {
     MecabGyp* mecabGyp = Nan::ObjectWrap::Unwrap<MecabGyp>(info.Holder());
-    v8::String::Utf8Value input(info[0]);
+    Nan::Utf8String input(info[0]->ToString());
     const MeCab::Node* node = mecabGyp->getTagger()->parseToNode(*input);
     std::vector<v8::Local<v8::Object>> nodes;
     while(node) {

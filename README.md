@@ -13,7 +13,6 @@ npm install mecab-gyp
 const MecabGyp = new require('mecab-gyp');
 var mecabGyp = new MecabGyp('');
 var results = mecabGyp.parseAsNode('本日は晴天なり');
-
 ```
 
 results
