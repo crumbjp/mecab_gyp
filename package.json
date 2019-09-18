@@ -1,6 +1,6 @@
 {
   "name": "mecab-gyp",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "[NODEJS] Mecab native binding",
   "main": "index.js",
   "author": "hiroaki.kubota@mail.crumb.jp",
