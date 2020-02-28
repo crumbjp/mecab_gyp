@@ -36,7 +36,7 @@ class MecabGyp : public Nan::ObjectWrap {
 
   static NAN_METHOD(New) {
     if (info.IsConstructCall()) {
-      Nan::Utf8String options(info[0]->ToString());
+      Nan::Utf8String options(Nan::To<v8::String>((info[0])).ToLocalChecked());
       MecabGyp *obj = new MecabGyp(*options);
       obj->Wrap(info.This());
       info.GetReturnValue().Set(info.This());
@@ -50,31 +50,31 @@ class MecabGyp : public Nan::ObjectWrap {
 
   static NAN_METHOD(ParseAsNode) {
     MecabGyp* mecabGyp = Nan::ObjectWrap::Unwrap<MecabGyp>(info.Holder());
-    Nan::Utf8String input(info[0]->ToString());
+    Nan::Utf8String input(Nan::To<v8::String>((info[0])).ToLocalChecked());
     const MeCab::Node* node = mecabGyp->getTagger()->parseToNode(*input);
     std::vector<v8::Local<v8::Object>> nodes;
     while(node) {
       v8::Local<v8::Object> obj = Nan::New<v8::Object>();
-      obj->Set(Nan::New("id").ToLocalChecked(), Nan::New(node->id));
-      obj->Set(Nan::New("surface").ToLocalChecked(), Nan::New(std::string(node->surface, node->length)).ToLocalChecked());
-      obj->Set(Nan::New("feature").ToLocalChecked(), Nan::New(node->feature).ToLocalChecked());
-      obj->Set(Nan::New("len").ToLocalChecked(), Nan::New(node->length));
-      obj->Set(Nan::New("rcAttr").ToLocalChecked(), Nan::New(node->rcAttr));
-      obj->Set(Nan::New("lcAttr").ToLocalChecked(), Nan::New(node->lcAttr));
-      obj->Set(Nan::New("posid").ToLocalChecked(), Nan::New(node->posid));
-      obj->Set(Nan::New("char_type").ToLocalChecked(), Nan::New(node->char_type));
-      obj->Set(Nan::New("stat").ToLocalChecked(), Nan::New(node->stat));
-      obj->Set(Nan::New("isbest").ToLocalChecked(), Nan::New(node->isbest));
-      obj->Set(Nan::New("alpha").ToLocalChecked(), Nan::New(node->alpha));
-      obj->Set(Nan::New("beta").ToLocalChecked(), Nan::New(node->beta));
-      obj->Set(Nan::New("prob").ToLocalChecked(), Nan::New(node->prob));
-      obj->Set(Nan::New("cost").ToLocalChecked(), Nan::New((int)node->cost));
+      Nan::Set(obj, Nan::New("id").ToLocalChecked(), Nan::New(node->id));
+      Nan::Set(obj, Nan::New("surface").ToLocalChecked(), Nan::New(std::string(node->surface, node->length)).ToLocalChecked());
+      Nan::Set(obj, Nan::New("feature").ToLocalChecked(), Nan::New(node->feature).ToLocalChecked());
+      Nan::Set(obj, Nan::New("len").ToLocalChecked(), Nan::New(node->length));
+      Nan::Set(obj, Nan::New("rcAttr").ToLocalChecked(), Nan::New(node->rcAttr));
+      Nan::Set(obj, Nan::New("lcAttr").ToLocalChecked(), Nan::New(node->lcAttr));
+      Nan::Set(obj, Nan::New("posid").ToLocalChecked(), Nan::New(node->posid));
+      Nan::Set(obj, Nan::New("char_type").ToLocalChecked(), Nan::New(node->char_type));
+      Nan::Set(obj, Nan::New("stat").ToLocalChecked(), Nan::New(node->stat));
+      Nan::Set(obj, Nan::New("isbest").ToLocalChecked(), Nan::New(node->isbest));
+      Nan::Set(obj, Nan::New("alpha").ToLocalChecked(), Nan::New(node->alpha));
+      Nan::Set(obj, Nan::New("beta").ToLocalChecked(), Nan::New(node->beta));
+      Nan::Set(obj, Nan::New("prob").ToLocalChecked(), Nan::New(node->prob));
+      Nan::Set(obj, Nan::New("cost").ToLocalChecked(), Nan::New((int)node->cost));
       nodes.push_back(obj);
       node = node->next;
     }
     v8::Local<v8::Array> results = Nan::New<v8::Array>(nodes.size());
     for(unsigned long i = 0; i < nodes.size(); i++) {
-      results->Set(i, nodes.at(i));
+      Nan::Set(results, i, nodes.at(i));
     }
     info.GetReturnValue().Set(results);
   }

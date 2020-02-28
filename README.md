@@ -1,6 +1,8 @@
 # mecab-gyp
 nan対応してるのでnodeの仕様変更にも強いはず
 
+1.0.6~ nodejs 12以降に対応
+
 # How to install
 
 ```
