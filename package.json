@@ -1,6 +1,6 @@
 {
   "name": "mecab-gyp",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "[NODEJS] Mecab native binding",
   "main": "index.js",
   "author": "hiroaki.kubota@mail.crumb.jp",
@@ -9,8 +9,8 @@
     "build": "./node_modules/node-gyp/bin/node-gyp.js configure && ./node_modules/node-gyp/bin/node-gyp.js build"
   },
   "dependencies": {
-    "nan": "^2.15.0",
-    "node-gyp": "^11.0.0"
+    "nan": "^2.22.0",
+    "node-gyp": "^11.1.0"
   },
   "readmeFilename": "README.md",
   "repository": {
