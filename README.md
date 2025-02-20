@@ -1,8 +1,9 @@
 # mecab-gyp
 nan対応してるのでnodeの仕様変更にも強いはず
 
-1.0.6~ nodejs 12以降に対応
-1.1.0~ nodejs python3に対応
+- 1.0.6~ nodejs12以降に対応
+- 1.1.0~ nodejs18 python3に対応
+- 1.2.0~ nodejs22 python3.12以降に対応
 
 # How to install
 
